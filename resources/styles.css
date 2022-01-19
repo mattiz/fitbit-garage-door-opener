@@ -1,0 +1,21 @@
+.background {
+  viewport-fill: black;
+}
+
+#statusLabel {
+  font-size: 30;
+  font-family: System-Bold;
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 35%;
+  fill: white;
+}
+
+.application-fill           { fill: fb-yellow; }
+.foreground-fill            { fill: fb-white; }
+.background-fill            { fill: fb-black; }
+
+#openButton #text {
+  text-buffer: "OPEN";
+}

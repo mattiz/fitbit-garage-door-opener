@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+    "@fitbit/sdk": "~6.0.2",
+    "@fitbit/sdk-cli": "^1.7.3"
+  },
+  "fitbit": {
+    "appUUID": "12a62732-9fe1-4088-8e41-d1f47adc8639",
+    "appType": "app",
+    "appDisplayName": "Open garage",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#e91e63",
+    "requestedPermissions": [
+      "access_internet"
+    ],
+    "buildTargets": [
+      "atlas",
+      "vulcan"
+    ],
+    "i18n": {
+      "en-US": {
+        "name": "Open garage"
+      }
+    },
+    "defaultLanguage": "en-US"
+  }
+}

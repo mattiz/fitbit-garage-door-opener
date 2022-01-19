@@ -1,0 +1,4 @@
+<svg class="background">
+  <text id="statusLabel" />
+  <use id="openButton" href="#text-button" class="text-button bottom application-fill" />
+</svg>
