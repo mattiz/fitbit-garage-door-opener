@@ -1,40 +1,59 @@
 import * as document from "document";
-import { preferences } from "user-settings";
-import * as util from "../common/utils";
 import { peerSocket } from "messaging";
-
-
-peerSocket.onerror = (err) => {
-  console.log(`Connection error with phone: ${err.code} - ${err.message}`);
-}
-
-peerSocket.onmessage = (evt) => {
-  console.log(`Got message from phone: ${evt.data}`);
-  
-  if( evt.data == 'OK' ) {
-    statusLabel.text = 'Door open!';
-  }
-  
-  if( evt.data == 'ERROR' ) {
-    statusLabel.text = 'HTTP failed!';
-  }
-}
-
 
 
 const statusLabel = document.getElementById("statusLabel");
 const openButton = document.getElementById("openButton");
 
-statusLabel.text = 'Ready';
+statusLabel.text = 'Waiting for phone..';
 
+
+/**
+ * Listen for messages from phone
+ */
+peerSocket.onmessage = (evt) => {
+  console.log(`Got message from phone: ${evt.data}`);
+
+  if( evt.data === 'COMPANION_UP' ) {
+    statusLabel.text = 'Ready!';
+  }
+  
+  if( evt.data === 'OK' ) {
+    statusLabel.text = 'Door open!';
+  }
+  
+  if( evt.data === 'ERROR' ) {
+    statusLabel.text = 'HTTP failed!';
+  }
+}
+
+
+/**
+ * Error communicating with phone
+ */
+peerSocket.onerror = (err) => {
+  console.error(`Connection error with phone: ${err.code} - ${err.message}`);
+}
+
+
+/**
+ * Listen for button clicks
+ */
 openButton.addEventListener("click", (evt) => {
   console.log("Max message size=" + peerSocket.MAX_MESSAGE_SIZE);
   
   if (peerSocket.readyState === peerSocket.OPEN) {
-    console.log('Sending open message to clock');
+    console.log('Sending open message to phone');
     statusLabel.text = 'Opening door..';
-    peerSocket.send("OPEN");
+
+    try {
+      peerSocket.send("OPEN");
+    } catch (e) {
+      console.error(`Failed sending message to phone: ${e}`);
+    }
+
   } else {
-    console.log('peerSocket is not open on client');
+    console.error('peerSocket is not open on client');
+    statusLabel.text = 'Socket not open';
   }
 })
