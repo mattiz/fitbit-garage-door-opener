@@ -1,5 +1,8 @@
 # Garage door opener
 
+![](screenshots/app.png)
+![](screenshots/menu.png)
+
 ## Development setup
 
 First time:
@@ -18,5 +21,6 @@ fitbit$ bi
 ```
 
 ## Resources
+- https://studio.fitbit.com
 - https://dev.fitbit.com/build/guides/command-line-interface/
 - https://gam.fitbit.com/
